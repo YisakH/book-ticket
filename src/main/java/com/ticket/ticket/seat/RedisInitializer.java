@@ -21,6 +21,7 @@ public class RedisInitializer {
         SeatInfo seatInfo = new SeatInfo();
         seatInfo.setRemainingSeats(1000); // 예: 초기 좌석 수 설정
         seatInfo.setSeatNumbers(List.of()); // 예: 초기 좌석 번호 설정
+        seatInfo.setMaxSeats(1000);
 
         // Redis에 초기값 저장
         ValueOperations<String, Object> operations = redisTemplate.opsForValue();

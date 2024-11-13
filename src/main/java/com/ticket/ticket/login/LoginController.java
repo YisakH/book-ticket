@@ -41,7 +41,6 @@ public class LoginController {
         params.add("password", password);
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(params, headers);
-        System.out.println(keycloakUrl);
 
         try {
             ResponseEntity<String> response = restTemplate.exchange(keycloakUrl, HttpMethod.POST, request, String.class);

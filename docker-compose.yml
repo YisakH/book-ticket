@@ -1,0 +1,13 @@
+services:
+  ticket-api:
+    container_name: ticket-api
+    image: yisakh/ticket-api
+    env_file:
+      - .env.properties
+    expose:
+      - 8080
+    ports:
+      - 8081:8080
+    tty: true
+    environment:
+      - TZ=Asia/Seoul

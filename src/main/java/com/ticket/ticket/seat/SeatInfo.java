@@ -9,6 +9,7 @@ import java.util.List;
 @Setter
 public class SeatInfo {
     private int remainingSeats;
+    private int maxSeats;
     private List<Integer> seatNumbers;
 
     public void decreaseRemainingSeats() {
