@@ -5,9 +5,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.session.NullAuthenticatedSessionStrategy;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
+
+import java.math.BigInteger;
+import java.security.KeyFactory;
+import java.security.interfaces.RSAPublicKey;
+import java.security.spec.RSAPublicKeySpec;
+import java.util.Base64;
 
 @Configuration
 @EnableWebSecurity
@@ -30,9 +38,7 @@ public class SecurityConfig {
                         .requestMatchers("/login/*").permitAll() // /login 경로는 인증 없이 접근 허용
                         .anyRequest().authenticated() // 다른 모든 요청은 인증 필요
                 )
-                .oauth2ResourceServer(oauth2 -> oauth2
-                        .jwt(jwt -> jwt
-                                .jwkSetUri(url + "/protocol/openid-connect/certs")
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.decoder(jwtDecoder())
                         )
                 );
 
@@ -43,5 +49,10 @@ public class SecurityConfig {
     @Bean
     protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {
         return new NullAuthenticatedSessionStrategy();
+    }
+
+    @Bean
+    public JwtDecoder jwtDecoder(){
+        return NimbusJwtDecoder.withJwkSetUri(keycloakProperties.getAuthServerUrl() + "/realms/ticket/protocol/openid-connect/certs").build();
     }
 }
