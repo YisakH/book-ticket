@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ticket-api-ingress
+  namespace: default
+spec:
+  ingressClassName: traefik  # Traefik Ingress Controller를 사용
+  rules:
+    #- host: "ticket.2esak.com"
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ticket-api-svc
+                port:
+                  number: 8080

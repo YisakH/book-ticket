@@ -44,10 +44,14 @@ public class LoginController {
 
         try {
             ResponseEntity<String> response = restTemplate.exchange(keycloakUrl, HttpMethod.POST, request, String.class);
-            return ResponseEntity.ok(response.getBody());
+
+            if (response.getStatusCode().is2xxSuccessful()) {
+                return ResponseEntity.ok(response.getBody());
+            }else{
+                throw new HttpClientErrorException(response.getStatusCode());
+            }
         } catch (HttpClientErrorException e) {
             // 더 자세한 오류 메시지 출력
-            System.err.println("Error response body: " + e.getResponseBodyAsString());
             return ResponseEntity.status(e.getStatusCode()).body("Failed to retrieve token: " + e.getResponseBodyAsString());
         }
     }
