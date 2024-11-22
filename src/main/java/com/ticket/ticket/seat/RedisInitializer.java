@@ -19,8 +19,8 @@ public class RedisInitializer {
     public void init() {
         // 초기 SeatInfo 객체 생성
         SeatInfo seatInfo = new SeatInfo();
-        seatInfo.setRemainingSeats(1000); // 예: 초기 좌석 수 설정
-        seatInfo.setSeatNumbers(List.of()); // 예: 초기 좌석 번호 설정
+        seatInfo.setRemainingSeats(1000); // 초기 좌석 수
+        seatInfo.setSeatNumbers(List.of()); //
         seatInfo.setMaxSeats(1000);
 
         // Redis에 초기값 저장
