@@ -1,0 +1,35 @@
+# src/main/resources/application-prd.yml
+
+server:
+  port: 8081
+
+spring:
+  config:
+    import: optional:file:.env.properties
+  application:
+    name: ticket
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/ticket
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: redis
+  devtools:
+    livereload:
+      enabled: true
+  kafka:
+    bootstrap-servers: localhost:29092,localhost:39092,localhost:49092
+
+aspect:
+  enabled:true
+
+keycloak:
+  auth-server-url: http://localhost:8080
+  realm: ticket
+  resource: ticket-api
+  credentials:
+    secret: T6SQhxISaFwDU35oDOMMKV1xJaujjXzy

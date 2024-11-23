@@ -1,4 +1,4 @@
-# src/main/resources/application.yml
+# src/main/resources/application-prd.yml
 
 server:
   port: ${WEB_PORT}
@@ -23,6 +23,9 @@ spring:
       enabled: true
   kafka:
     bootstrap-servers: ${KAFKA_URL}
+
+aspect:
+  enabled:${ENABLED}
 
 keycloak:
   auth-server-url: ${KEYCLOAK_URL}

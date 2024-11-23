@@ -53,6 +53,8 @@ public class LoginController {
         } catch (HttpClientErrorException e) {
             // 더 자세한 오류 메시지 출력
             return ResponseEntity.status(e.getStatusCode()).body("Failed to retrieve token: " + e.getResponseBodyAsString());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to retrieve token: " + e.getMessage());
         }
     }
 }

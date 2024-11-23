@@ -4,13 +4,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
 public class SeatInfo {
     private int remainingSeats;
     private int maxSeats;
-    private List<Integer> seatNumbers;
+    private Set<Integer> seatNumbers;
 
     public void decreaseRemainingSeats() {
         remainingSeats--;

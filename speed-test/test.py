@@ -28,10 +28,6 @@ class TicketPurchaseScenario(SequentialTaskSet):
             print("Error: access_token not found in response")
             print()
             self.interrupt()  # 사용자 시나리오 중단
-        else:
-            # 로그인 실패 시 에러 로그 출력 및 중단
-            print(f"Login failed with status code: {response.status_code}")
-            self.interrupt()
         
         # 로그인 후 대기 상태로 전환하여 타겟 시간을 기다림
         while datetime.now() < self.target_time:
