@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 모든 태그와 커밋을 가져옴
 
       - name: Get the current version
         id: vars
