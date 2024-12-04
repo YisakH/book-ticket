@@ -33,3 +33,5 @@ keycloak:
   resource: ${CLIENT_NAME}
   credentials:
     secret: ${CLIENT_SECRET}
+
+max-seat-size: ${MAX_SEAT_SIZE}
