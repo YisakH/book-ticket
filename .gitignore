@@ -178,4 +178,4 @@ gradle-app.setting
 
 .env.properties
 *.bak
-*/.idea/
+**/.idea/

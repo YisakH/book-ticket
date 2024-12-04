@@ -9,12 +9,13 @@ name: Gradle Package
 
 on:
   push:
+    paths:
+      - "ticket-db"
     tags:
       - "v*"  # 태그 이름이 v로 시작할 때만 트리거 (예: v1.0, v2.1 등)
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -34,7 +35,9 @@ jobs:
       uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
 
     - name: Build with Gradle
-      run: ./gradlew build -x test -Dspring.profiles.active=prd
+      run:
+        cd ticket-db
+        ./gradlew build -Dspring.profiles.active=prd
 
     # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
     - name: Docker Login
@@ -47,5 +50,5 @@ jobs:
       env:
         TAG: ${{ github.ref_name }}  # 현재 태그 이름 (예: v1.0)
       run: |
-        docker build -t yisakh/ticket-api:${TAG} .
-        docker push yisakh/ticket-api:${TAG}
+        docker build -t yisakh/ticket-db:${TAG} .
+        docker push yisakh/ticket-db:${TAG}
