@@ -32,4 +32,4 @@ keycloak:
   realm: ticket
   resource: ticket-api
   credentials:
-    secret: T6SQhxISaFwDU35oDOMMKV1xJaujjXzy
+    secret: cpEgArMnBBctUMf1qUV8n8JyedINy3LD

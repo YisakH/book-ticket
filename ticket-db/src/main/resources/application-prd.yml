@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: ticket-db
+  datasource:
+    url: jdbc:postgresql://${DATABASE_URL}/${DATABASE_NAME}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  kafka:
+    consumer:
+      group-id: ${KAFKA_CONSUMER_GROUP_ID:default-group}
+    bootstrap-servers: ${KAFKA_URL:localhost:9092}
+server:
+  port: 8082
