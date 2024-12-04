@@ -48,5 +48,6 @@ jobs:
       env:
         TAG: ${{ github.ref_name }}  # 현재 태그 이름 (예: v1.0)
       run: |
+        cd api-server
         docker build -t yisakh/ticket-api:${TAG} .
         docker push yisakh/ticket-api:${TAG}

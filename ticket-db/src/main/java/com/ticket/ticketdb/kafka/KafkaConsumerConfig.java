@@ -14,7 +14,6 @@ import java.util.Map;
 
 @Configuration
 public class KafkaConsumerConfig {
-
     // 환경변수에서 값을 읽어옴
     @Value("${KAFKA_URL:localhost:29092}")
     private String bootstrapServers;
