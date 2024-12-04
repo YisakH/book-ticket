@@ -6,7 +6,6 @@ metadata:
 spec:
   ingressClassName: traefik  # Traefik Ingress Controller를 사용
   rules:
-    #- host: "ticket.2esak.com"
     - http:
         paths:
           - path: /

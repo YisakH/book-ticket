@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ticket-db-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: ticket-db
+  ports:
+    - port: 8082
+      targetPort: 8082

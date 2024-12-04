@@ -1,0 +1,33 @@
+name: Create Tag on Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  create-tag:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get the current version
+        id: vars
+        run: |
+          # Get the latest tag from GitHub
+          TAG=$(git describe --tags --abbrev=0 || echo "v0.0.0")
+          # Increment version (e.g., v1.0.0 -> v1.0.1)
+          IFS='.' read -r major minor patch <<<"${TAG#v}"
+          PATCH=$((patch + 1))
+          echo "NEW_TAG=v${major}.${minor}.${PATCH}" >> $GITHUB_ENV
+
+      - name: Create a new tag
+        run: |
+          git tag $NEW_TAG
+          git push origin $NEW_TAG
+
+      - name: Output the new tag
+        run: |
+          echo "New tag created: $NEW_TAG"

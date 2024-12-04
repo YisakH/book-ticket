@@ -11,6 +11,9 @@ on:
   push:
     paths:
       - "api-server/**"
+    tags:
+      - "*"
+
 
 jobs:
   build:
@@ -49,5 +52,5 @@ jobs:
         TAG: ${{ github.ref_name }}  # 현재 태그 이름 (예: v1.0)
       run: |
         cd api-server
-        docker build -t yisakh/ticket-api:${TAG} .
+        docker build -t yisakh/ticket-api:${TAG} -t yisakh/ticket-api:latest .
         docker push yisakh/ticket-api:${TAG}
