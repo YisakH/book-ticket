@@ -19,7 +19,7 @@ jobs:
         id: vars
         run: |
           # Get the latest tag from GitHub
-          TAG=$(git describe --tags --abbrev=0 || echo "v0.0.0")
+          TAG=$(git tag --sort=-version:refname | head -n 1)
           # Increment version (e.g., v1.0.0 -> v1.0.1)
           IFS='.' read -r major minor patch <<<"${TAG#v}"
           PATCH=$((patch + 1))
