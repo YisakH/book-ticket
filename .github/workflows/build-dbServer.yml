@@ -54,3 +54,4 @@ jobs:
         cd ticket-db
         docker build -t yisakh/ticket-db:${TAG} -t yisakh/ticket-db:latest .
         docker push yisakh/ticket-db:${TAG}
+        docker push yisakh/ticket-db:latest

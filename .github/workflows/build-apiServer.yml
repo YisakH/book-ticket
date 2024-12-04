@@ -54,3 +54,4 @@ jobs:
         cd api-server
         docker build -t yisakh/ticket-api:${TAG} -t yisakh/ticket-api:latest .
         docker push yisakh/ticket-api:${TAG}
+        docker push yisakh/ticket-api:latest
