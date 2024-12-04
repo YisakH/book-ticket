@@ -5,14 +5,12 @@
 # This workflow will build a package using Gradle and then publish it to GitHub packages when a release is created
 # For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#Publishing-using-gradle
 
-name: Gradle Package
+name: Build Ticket-DB
 
 on:
   push:
     paths:
-      - "ticket-db"
-    tags:
-      - "v*"  # 태그 이름이 v로 시작할 때만 트리거 (예: v1.0, v2.1 등)
+      - "ticket-db/**"
 
 jobs:
   build:
