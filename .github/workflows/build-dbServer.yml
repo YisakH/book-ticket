@@ -8,9 +8,12 @@
 name: Build Ticket-DB
 
 on:
-  push:
-    tags:
-      - "*"
+  workflow_run:
+    workflows:
+      - "Create Tag on Deployment"
+    types:
+      - completed
+
 
 jobs:
   build:

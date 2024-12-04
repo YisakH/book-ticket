@@ -8,9 +8,11 @@
 name: Build Ticket-api
 
 on:
-  push:
-    tags:
-      - "*"
+  workflow_run:
+    workflows:
+      - "Create Tag on Deployment"
+    types:
+      - completed
 
 
 jobs:
