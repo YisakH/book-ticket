@@ -20,8 +20,8 @@ public class KafkaConsumerService {
     @KafkaListener(topics ="test-topic", groupId = "ticket-db")
     public void consume(String message) {
         try{
-        Ticket ticket = objectMapper.readValue(message, Ticket.class);
-        ticketService.saveTicket(ticket);
+            Ticket ticket = objectMapper.readValue(message, Ticket.class);
+            ticketService.saveTicket(ticket);
         } catch (Exception e){
             System.out.println("Error parsing ticket: " + e.getMessage());
         }
