@@ -9,8 +9,6 @@ name: Build Ticket-api
 
 on:
   push:
-    paths:
-      - "api-server/**"
     tags:
       - "*"
 

@@ -9,8 +9,6 @@ name: Build Ticket-DB
 
 on:
   push:
-    paths:
-      - "ticket-db/**"
     tags:
       - "*"
 
