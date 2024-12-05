@@ -3,6 +3,10 @@
 server:
   port: ${WEB_PORT}
 
+logging:
+  level:
+    root: ${LOGGING_LEVEL:info}
+
 spring:
   config:
     import: optional:file:.env.properties
