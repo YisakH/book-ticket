@@ -1,6 +1,7 @@
 package com.ticket.ticket.seat;
 
 import jakarta.annotation.PostConstruct;
+import org.apache.kafka.shaded.io.opentelemetry.proto.metrics.v1.SummaryDataPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -22,6 +23,10 @@ public class RedisInitializer {
 
     @PostConstruct
     public void init() {
+        // redis에 기존 값 없을경우 초기화하기
+        if (redisTemplate.hasKey("seat")){
+            return;
+        }
         // 초기 SeatInfo 객체 생성
         SeatInfo seatInfo = new SeatInfo();
         seatInfo.setRemainingSeats(maxSeatSize); // 초기 좌석 수
