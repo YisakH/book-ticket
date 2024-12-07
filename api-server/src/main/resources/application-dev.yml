@@ -5,7 +5,7 @@ server:
 
 logging:
   level:
-    root: debug
+    root: info
 
 spring:
   config:
@@ -38,4 +38,7 @@ keycloak:
   credentials:
     secret: cpEgArMnBBctUMf1qUV8n8JyedINy3LD
 
-max-seat-size: 10000
+ticket:
+  max-seat-size: 10000
+  max-retries: 5
+  max-sleep-time: 300

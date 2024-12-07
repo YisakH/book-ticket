@@ -38,4 +38,7 @@ keycloak:
   credentials:
     secret: ${CLIENT_SECRET}
 
-max-seat-size: ${MAX_SEAT_SIZE}
+ticket:
+  max-seat-size: ${MAX_SEAT_SIZE}
+  max-retries: ${MAX_RETRIES}
+  max-sleep-time: ${MAX_SLEEP_TIME}
