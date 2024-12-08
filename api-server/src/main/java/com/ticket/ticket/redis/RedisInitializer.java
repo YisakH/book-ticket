@@ -1,25 +1,20 @@
 package com.ticket.ticket.redis;
 
 import com.ticket.ticket.constants.RedisKey;
-import com.ticket.ticket.seat.SeatInfo;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.cache.CacheProperties;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
-
-import java.util.HashSet;
 
 @Component
 public class RedisInitializer {
 
-    private final RedisTemplate<String, Object> redisTemplate;
+    private final RedisTemplate<String, Long> redisTemplate;
     private final int maxSeatSize;
 
     @Autowired
-    public RedisInitializer(@Value("${ticket.max-seat-size}") int maxSeatSize, RedisTemplate<String, Object> redisTemplate) {
+    public RedisInitializer(@Value("${ticket.max-seat-size}") int maxSeatSize, RedisTemplate<String, Long> redisTemplate) {
         this.redisTemplate = redisTemplate;
         this.maxSeatSize = maxSeatSize;
     }

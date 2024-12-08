@@ -31,7 +31,7 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
     implementation 'org.springframework.boot:spring-boot-starter'
-    implementation group: 'org.keycloak', name: 'keycloak-spring-boot-starter', version: '24.0.5'
+    implementation group: 'org.keycloak', name: 'keycloak-spring-boot-starter', version: '25.0.3'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
 

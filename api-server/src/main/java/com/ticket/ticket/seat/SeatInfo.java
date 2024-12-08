@@ -10,5 +10,5 @@ import java.util.Set;
 public class SeatInfo {
     private int remainSeatNum;
     private int maxSeatNum;
-    private Set<Object> seatNumbers;
+    private Set<Long> seatNumbers;
 }

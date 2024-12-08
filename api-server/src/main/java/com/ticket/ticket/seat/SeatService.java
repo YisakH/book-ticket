@@ -39,7 +39,7 @@ public class SeatService {
     }
 
     protected SeatPurchaseStatus buySeats(int seatNumber, String userId){
-        SeatPurchaseStatus status = redisRepository.buySeat(seatNumber);
+        SeatPurchaseStatus status = redisRepository.buySeat((long) seatNumber);
 
         if (status != SUCCESS){
             return status;

@@ -3,7 +3,6 @@ package com.ticket.ticket.redis;
 import com.ticket.ticket.constants.RedisKey;
 import com.ticket.ticket.constants.SeatPurchaseStatus;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.cache.CacheProperties;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.SetOperations;
@@ -18,39 +17,39 @@ public class RedisSeatRepository {
 
     private final int maxRetries;
     private final int maxSleepTime;
-    private final RedisTemplate<String, Object> redisTemplate;
+    private final RedisTemplate<String, Long> redisTemplate;
 
     public RedisSeatRepository(@Value("${ticket.max-retries}") int maxRetries,
                                @Value("${ticket.max-sleep-time}") int maxSleepTime,
-                               RedisTemplate<String, Object> redisTemplate) {
+                               RedisTemplate<String, Long> redisTemplate) {
         this.maxRetries = maxRetries;
         this.maxSleepTime = maxSleepTime;
         this.redisTemplate = redisTemplate;
     }
 
-    public Set<Object> getSeatList() {
+    public Set<Long> getSeatList() {
         return redisTemplate.opsForSet().members(RedisKey.SEAT_LIST.getKey());
     }
 
     public int getRemainSeatNum(){
-        String str = (String) redisTemplate.opsForHash()
+        Long val = (Long) redisTemplate.opsForHash()
             .get(RedisKey.SEAT_NUMBER_INFO.getKey(), RedisKey.REMAIN_SEAT_NUM.getKey());
 
-        if (str != null) {
-            return Integer.parseInt(str);
+        if (val == null) {
+            return -1;
         }
-        return -1;
+        return val.intValue();
     }
 
-    public SeatPurchaseStatus buySeat(int seatNumber){
+    public SeatPurchaseStatus buySeat(Long seatNumber){
         boolean success = false;
-        ValueOperations<String, Object> opsForValue = redisTemplate.opsForValue();
-        SetOperations<String, Object> opsForSet = redisTemplate.opsForSet();
-        HashOperations<String, String, Object> opsForHash = redisTemplate.opsForHash();
+        ValueOperations<String, Long> opsForValue = redisTemplate.opsForValue();
+        SetOperations<String, Long> opsForSet = redisTemplate.opsForSet();
+        HashOperations<String, String, Long> opsForHash = redisTemplate.opsForHash();
 
         for (int i = 0; i < maxRetries && !success; i++){
             Boolean locked = opsForValue
-                    .setIfAbsent(generateKey(seatNumber), "lock", Duration.ofMillis(300));
+                    .setIfAbsent(generateKey(seatNumber), 1L, Duration.ofMillis(300));
             if (locked != null && locked){
                 try {
                     Boolean isMember = opsForSet
@@ -82,7 +81,7 @@ public class RedisSeatRepository {
         return SeatPurchaseStatus.SUCCESS;
     }
 
-    public String generateKey(int key) {
+    public String generateKey(Long key) {
         return RedisKey.LOCK_PREFIX.getKey() + key;
     }
 }
