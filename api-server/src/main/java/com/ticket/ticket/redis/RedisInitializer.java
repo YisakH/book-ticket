@@ -33,9 +33,10 @@ public class RedisInitializer {
         }
 
         redisTemplate.opsForHash()
-                .increment(RedisKey.SEAT_NUMBER_INFO.getKey(),
+                .put(RedisKey.SEAT_NUMBER_INFO.getKey(),
                         RedisKey.REMAIN_SEAT_NUM.getKey(),
-                        maxSeatSize);
+                        String.valueOf(maxSeatSize)); // 문자열로 저장
+
 
     }
 }
