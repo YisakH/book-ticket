@@ -33,8 +33,13 @@ public class RedisSeatRepository {
     }
 
     public int getRemainSeatNum(){
-        return (int) redisTemplate.opsForHash()
+        String str = (String) redisTemplate.opsForHash()
             .get(RedisKey.SEAT_NUMBER_INFO.getKey(), RedisKey.REMAIN_SEAT_NUM.getKey());
+
+        if (str != null) {
+            return Integer.parseInt(str);
+        }
+        return -1;
     }
 
     public SeatPurchaseStatus buySeat(int seatNumber){
