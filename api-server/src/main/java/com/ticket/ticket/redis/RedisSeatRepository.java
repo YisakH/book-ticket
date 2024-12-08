@@ -32,8 +32,8 @@ public class RedisSeatRepository {
         return redisTemplate.opsForSet().members(RedisKey.SEAT_LIST.getKey());
     }
 
-    public Integer getRemainSeatNum(){
-        return (Integer) redisTemplate.opsForHash()
+    public int getRemainSeatNum(){
+        return (int) redisTemplate.opsForHash()
             .get(RedisKey.SEAT_NUMBER_INFO.getKey(), RedisKey.REMAIN_SEAT_NUM.getKey());
     }
 
@@ -43,7 +43,7 @@ public class RedisSeatRepository {
         SetOperations<String, Object> opsForSet = redisTemplate.opsForSet();
         HashOperations<String, String, Object> opsForHash = redisTemplate.opsForHash();
 
-        for (int i = 0; i < maxRetries; i++){
+        for (int i = 0; i < maxRetries && !success; i++){
             Boolean locked = opsForValue
                     .setIfAbsent(generateKey(seatNumber), "lock", Duration.ofMillis(300));
             if (locked != null && locked){

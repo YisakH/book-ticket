@@ -32,6 +32,10 @@ public class RedisInitializer {
             return;
         }
 
-        redisTemplate.opsForValue().set(RedisKey.REMAIN_SEAT_NUM.getKey(), maxSeatSize);
+        redisTemplate.opsForHash()
+                .increment(RedisKey.SEAT_NUMBER_INFO.getKey(),
+                        RedisKey.REMAIN_SEAT_NUM.getKey(),
+                        maxSeatSize);
+
     }
 }
